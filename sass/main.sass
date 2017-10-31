@@ -1,0 +1,31 @@
+@import reset
+
+body
+  background-color: black
+
+.container
+  position: relative
+  top: 100px
+  margin: 0 auto
+  border: 1rem solid white
+  display: block
+  width: 70rem
+  height: 40rem
+
+.body-part
+  background-color: yellowgreen
+  border: 0
+  width: 1rem
+  height: 1rem
+  position: absolute
+  text-align: center
+  &::before
+    content: '$'
+
+.head-part
+  @extend .body-part
+  background-color: red
+  &::before
+    content: 'D'
+    color: white
+    font-weight: bold

@@ -43,12 +43,22 @@ body {
   margin: 0 auto;
   border: 1rem solid white;
   display: block;
-  width: 900px;
-  height: 600px; }
+  width: 70rem;
+  height: 40rem; }
 
-.snake {
-  background-color: white;
+.body-part, .head-part {
+  background-color: yellowgreen;
   border: 0;
-  width: 15px;
-  height: 15px;
-  position: relative; }
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  text-align: center; }
+  .body-part::before, .head-part::before {
+    content: '$'; }
+
+.head-part {
+  background-color: red; }
+  .head-part::before {
+    content: 'D';
+    color: white;
+    font-weight: bold; }
