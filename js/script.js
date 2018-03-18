@@ -1,8 +1,12 @@
 $(document).ready(function () {
   let container = $('#container');
-  
+  let scoreboard = $('#scoreboard');
+
+  //I need this as var
+  var fruitPos = createFruit();
+
   let snake = {
-    bodyLength: 10,
+    bodyLength: 100,
     moveDirection: 'right',
     points: 0,
     headPosition: [35, 20],
@@ -15,7 +19,7 @@ $(document).ready(function () {
     increasePoints: function () {
       this.points++;
     },
-    
+
     showPoints: function () {
       return this.points;
     },
@@ -71,8 +75,9 @@ $(document).ready(function () {
 
       //delete all body parts
       container.empty();
+      paintFruit(fruitPos);
       let i = 0,
-          head = body.length - 1;
+        head = body.length - 1;
       while (body[i]) {
         if (i === head) {
           container.append('<div class="head-part" style="top: ' + body[i][1] + 'rem; left: ' + body[i][0] + 'rem"></div>');
@@ -87,18 +92,21 @@ $(document).ready(function () {
 
       //headPosition is changed by move value
       this.headPosition[0] += move[0];
+      if (this.body.indexOf(fruitPos) === 0) {
+        alert('yey');
+      }
 
       //this function checks if head hits walls
       if ((this.headPosition[0] > 69) || (this.headPosition[0] < 0)) {
         clearInterval(movement);
-        alert('gameOverMan' + this.headPosition);
+        alert('gameOverMan' + fruitPos + ' ' + this.headPosition);
       }
       this.headPosition[1] += move[1];
 
       //this function checks if head hits walls
       if ((this.headPosition[1] > 39) || (this.headPosition[1] < 0)) {
         clearInterval(movement);
-        alert('gameOverMan' + this.headPosition);
+        alert('gameOverMan' + fruitPos + ' ' + this.headPosition);
       }
 
 
@@ -106,8 +114,11 @@ $(document).ready(function () {
       //this.headPosition, it was changing all previous values in snake.body.
       return newHeadPosition = [...this.headPosition];
     },
-    
+
   };
+
+  //this is start of the game
+  createFruit();
 
   $(document).on('keydown', function (e) {
     if (e.key === 'Escape') {
@@ -123,11 +134,11 @@ $(document).ready(function () {
 
     //array to help check if correct key was pressed
     let allowedKeys = [
-        'ArrowUp',
-        'ArrowDown',
-        'ArrowLeft',
-        'ArrowRight',
-        ];
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+    ];
 
     //if pressed key is in the array
     if (allowedKeys.indexOf(e.key) !== -1) {
@@ -137,22 +148,30 @@ $(document).ready(function () {
 
       //change direction of snake
       snake.changeDirection(newKey);
-    } else {
-      console.log('error');
     }
-    });
+  });
+
+  scoreboard.text(snake.showPoints());
 
   let movement = setInterval(function () {
     snake.moveSnake(snake.moveDirection);
-  }, 200);
+  }, 80);
 
-  container.on('click', function () {
-    snake.increaseLength();
-  })
+  function createFruit () {
+    let fruitPosArr = [];
+    fruitPosArr.push(randomPos(70));
+    fruitPosArr.push(randomPos(40));
 
-  // container.on('click', function () {
-  //   console.log('stop');
-  //   clearInterval(movement);
-  // });
+    fruitPos = fruitPosArr;
+  }
 
+  function randomPos(limit) {
+    return Math.floor(Math.random() * limit + 1);
+  }
+
+  function paintFruit (arr) {
+    container.append('<div class="fruit" style="top: ' + arr[1] + 'rem; left: ' + arr[0] + 'rem"></div>');
+  }
+
+  console.log(fruitPos);
 });
