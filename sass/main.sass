@@ -5,7 +5,7 @@ body
 
 .container
   position: relative
-  top: 100px
+  top: 10rem
   margin: 0 auto
   border: 1rem solid white
   display: block
@@ -29,3 +29,17 @@ body
     content: 'D'
     color: white
     font-weight: bold
+
+.fruit
+  @extend .body-part
+  background-color: orangered
+  &::before
+    content: 'X'
+    color: darkblue
+    font-weight: 900
+
+.scoreboard
+  width: 5rem
+  height: 1rem
+  background-color: white
+  color: red

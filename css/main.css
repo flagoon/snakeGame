@@ -39,21 +39,21 @@ body {
 
 .container {
   position: relative;
-  top: 100px;
+  top: 10rem;
   margin: 0 auto;
   border: 1rem solid white;
   display: block;
   width: 70rem;
   height: 40rem; }
 
-.body-part, .head-part {
+.body-part, .head-part, .fruit {
   background-color: yellowgreen;
   border: 0;
   width: 1rem;
   height: 1rem;
   position: absolute;
   text-align: center; }
-  .body-part::before, .head-part::before {
+  .body-part::before, .head-part::before, .fruit::before {
     content: '$'; }
 
 .head-part {
@@ -62,3 +62,16 @@ body {
     content: 'D';
     color: white;
     font-weight: bold; }
+
+.fruit {
+  background-color: orangered; }
+  .fruit::before {
+    content: 'X';
+    color: darkblue;
+    font-weight: 900; }
+
+.scoreboard {
+  width: 5rem;
+  height: 1rem;
+  background-color: white;
+  color: red; }
